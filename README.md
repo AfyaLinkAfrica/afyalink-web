@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/logo.svg" alt="AfyaLink Africa logo" width="150" />
+<img src="docs/assets/logo.png" alt="AfyaLink Africa logo" width="150" />
 
 <h1>AfyaLink Africa</h1>
 
