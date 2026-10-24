@@ -1,0 +1,13 @@
+# Default owner for everything
+*                         @Dantechdevs
+
+# Security-sensitive areas always need owner review
+/app/Http/Middleware/     @Dantechdevs
+/config/                  @Dantechdevs
+/database/migrations/     @Dantechdevs
+/.github/                 @Dantechdevs
+SECURITY.md               @Dantechdevs
+
+# Add area leads as they join, for example:
+# /resources/lang/        @translation-lead
+# /docs/health-content/   @healthcare-reviewer
