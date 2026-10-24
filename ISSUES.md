@@ -80,7 +80,7 @@ Show one facility's details, services, and when its information was last verifie
 - [ ] Clear note when information is unverified
 - [ ] 404 page for unknown facilities
 
-## 8. Add 'Report incorrect information' form
+## 8. Add a form to report incorrect information
 **Labels:** `backend`, `help wanted`, `security`
 
 Users can flag wrong facility details for maintainer review.

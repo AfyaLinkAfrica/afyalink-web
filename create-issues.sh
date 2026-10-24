@@ -99,7 +99,7 @@ Show one facility's details, services, and when its information was last verifie
 Use synthetic data only. Never commit real patient information. See CONTRIBUTING.md.
 EOF
 
-gh issue create --repo "$REPO" --title 'Add 'Report incorrect information' form' --label 'backend,help wanted,security' --body-file - <<'EOF'
+gh issue create --repo "$REPO" --title 'Add a form to report incorrect information' --label 'backend,help wanted,security' --body-file - <<'EOF'
 Users can flag wrong facility details for maintainer review.
 
 **Acceptance criteria**
