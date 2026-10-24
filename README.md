@@ -454,6 +454,8 @@ Please do not open pull requests that include private patient information, crede
 
 **Contact:** [dantechdevs@gmail.com](mailto:dantechdevs@gmail.com)
 
+> **Status:** Early development. The Laravel foundation, Facility model, and CI are in place. The directory pages are being built. See the open issues to get involved.
+
 AfyaLink Africa is being developed as an international collaboration between software developers, healthcare professionals, researchers, and community partners.
 
 The initiative aims to create opportunities for contributors to work together on technology that addresses practical community health challenges.
