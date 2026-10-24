@@ -46,6 +46,7 @@ git clone https://github.com/<your-username>/afyalink-web.git
 cd afyalink-web
 composer install
 cp .env.example .env
+# Create an empty MySQL database named "afyalink" and check the DB_* values in .env
 php artisan key:generate
 php artisan migrate --seed
 php artisan test
