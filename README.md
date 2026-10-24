@@ -1,6 +1,31 @@
-# 🌍 AfyaLink Africa
+<div align="center">
 
-### Connecting Communities. Transforming Healthcare.
+<img src="docs/assets/logo.svg" alt="AfyaLink Africa logo" width="150" />
+
+<h1>AfyaLink Africa</h1>
+
+<h3>Open-source community health technology for Africa</h3>
+
+<p><strong>Connecting communities. Transforming healthcare.</strong></p>
+
+<p>
+<a href="https://github.com/AfyaLinkAfrica/afyalink-web/actions/workflows/ci.yml"><img src="https://github.com/AfyaLinkAfrica/afyalink-web/actions/workflows/ci.yml/badge.svg" alt="CI status" /></a>
+<img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license" />
+<img src="https://img.shields.io/badge/built%20with-Laravel-FF2D20" alt="Built with Laravel" />
+<a href="https://github.com/AfyaLinkAfrica/afyalink-web/labels/good%20first%20issue"><img src="https://img.shields.io/github/issues/AfyaLinkAfrica/afyalink-web/good%20first%20issue?label=good%20first%20issues&color=7057ff" alt="Good first issues" /></a>
+<img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs welcome" />
+</p>
+
+<p>
+<a href="CONTRIBUTING.md">Contribute</a> ·
+<a href="https://github.com/AfyaLinkAfrica/afyalink-web/issues">Issues</a> ·
+<a href="https://github.com/AfyaLinkAfrica/afyalink-web/discussions">Discussions</a> ·
+<a href="mailto:dantechdevs@gmail.com">Contact</a>
+</p>
+
+</div>
+
+> **Status:** Early development. The Laravel foundation, Facility model, and CI are in place. The directory pages are being built. See the open issues to get involved.
 
 **AfyaLink Africa** is an open-source community health technology initiative dedicated to improving access to reliable health information and healthcare services through technology and global collaboration.
 
@@ -9,6 +34,24 @@ Founded by **Dantechdevs Developers**, the project aims to bring together softwa
 Our journey begins in Kenya, with a long-term vision of expanding across Africa and beyond.
 
 > **Our mission:** To make reliable health information and healthcare services more accessible through inclusive, secure, and community-driven technology.
+
+---
+
+## 🚀 Your First Contribution in 10 Minutes
+
+Pick a [good first issue](https://github.com/AfyaLinkAfrica/afyalink-web/labels/good%20first%20issue), then:
+
+```bash
+git clone https://github.com/<your-username>/afyalink-web.git
+cd afyalink-web
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan test
+```
+
+Create a branch, make your change, run `./vendor/bin/pint`, and open a pull request. Use **synthetic data only**. Never commit real patient information. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
 
 ---
 
@@ -453,8 +496,6 @@ Please do not open pull requests that include private patient information, crede
 **Founded by:** Dantechdevs Developers
 
 **Contact:** [dantechdevs@gmail.com](mailto:dantechdevs@gmail.com)
-
-> **Status:** Early development. The Laravel foundation, Facility model, and CI are in place. The directory pages are being built. See the open issues to get involved.
 
 AfyaLink Africa is being developed as an international collaboration between software developers, healthcare professionals, researchers, and community partners.
 
