@@ -7,5 +7,4 @@ return [
     'status' => 'Early development. The facility directory is being built in the open.',
     'contribute' => 'Contribute on GitHub',
     'issues' => 'Good first issues',
-    'disclaimer' => 'AfyaLink shares information only. It does not replace professional medical advice, diagnosis, or treatment. In an emergency, contact your local emergency services or go to the nearest health facility.',
 ];
