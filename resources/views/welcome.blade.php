@@ -48,7 +48,7 @@
             border: 1px solid var(--border);
             border-radius: 1rem;
         }
-        img { width: 7rem; height: auto; }
+        img { width: 11rem; max-width: 100%; height: auto; }
         h1 { margin: 1rem 0 .25rem; font-size: 2rem; }
         .tagline { margin: 0 0 1rem; font-weight: 600; color: var(--brand); }
         p { margin: .75rem 0; color: var(--muted); }
