@@ -535,6 +535,7 @@ Whether you are a developer in Kenya, a healthcare professional in India, a desi
 
 - **GitHub:** [github.com/AfyaLinkAfrica](https://github.com/AfyaLinkAfrica)
 - **Project discussions:** [GitHub Discussions](https://github.com/AfyaLinkAfrica/afyalink-web/discussions)
+- **Introduce yourself:** Say hello in [Discussions](https://github.com/AfyaLinkAfrica/afyalink-web/discussions) and tell us how you would like to help. Everyone who introduces themselves is welcome to be tagged on issues that match their skills.
 - **Technical contributions:** Open an issue or submit a pull request.
 - **Partnerships and general enquiries:** Email [dantechdevs@gmail.com](mailto:dantechdevs@gmail.com).
 - **Security concerns:** Email [dantechdevs@gmail.com](mailto:dantechdevs@gmail.com) with the subject line "AfyaLink Security". Do not post vulnerabilities publicly.
