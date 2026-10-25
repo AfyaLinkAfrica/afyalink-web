@@ -109,6 +109,7 @@
         }
         footer.site-footer p { margin: .35rem 0; }
     </style>
+    @stack('styles')
 </head>
 <body>
     <a class="skip-link" href="#main-content">{{ __('layout.skip_to_content') }}</a>
