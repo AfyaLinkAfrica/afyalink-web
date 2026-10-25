@@ -85,6 +85,11 @@
         </form>
     </section>
 
+    <section class="card" aria-labelledby="freshness-heading">
+        <h2 id="freshness-heading">{{ __('home.freshness_heading') }}</h2>
+        <p>{{ __('home.freshness_note') }}</p>
+    </section>
+
     <section class="card" aria-labelledby="browse-heading">
         <h2 id="browse-heading">{{ __('home.browse_heading') }}</h2>
         <ul class="county-links">
