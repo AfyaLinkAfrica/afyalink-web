@@ -7,4 +7,7 @@ return [
     'status' => 'Early development. The facility directory is being built in the open.',
     'contribute' => 'Contribute on GitHub',
     'issues' => 'Good first issues',
+    'search_heading' => 'Find a health facility',
+    'browse_heading' => 'Browse by county',
+    'about_heading' => 'About the project',
 ];
