@@ -43,6 +43,9 @@
         border: 2px solid var(--border);
         border-radius: 999px;
     }
+    ol.steps { margin: 0; padding-left: 1.5rem; }
+    ol.steps li { margin-bottom: .5rem; color: var(--muted); }
+    ol.steps li:last-child { margin-bottom: 0; }
 </style>
 @endpush
 
@@ -92,6 +95,15 @@
                 <li><a href="{{ route('facilities.index', ['county' => $county]) }}">{{ $county }}</a></li>
             @endforeach
         </ul>
+    </section>
+
+    <section class="card" aria-labelledby="how-heading">
+        <h2 id="how-heading">{{ __('home.how_heading') }}</h2>
+        <ol class="steps">
+            <li>{{ __('home.how_step_search') }}</li>
+            <li>{{ __('home.how_step_check') }}</li>
+            <li>{{ __('home.how_step_contact') }}</li>
+        </ol>
     </section>
 
     <section class="card" aria-labelledby="about-heading">
