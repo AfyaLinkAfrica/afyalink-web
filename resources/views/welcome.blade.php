@@ -3,7 +3,7 @@
 @push('styles')
 <style>
     .hero { text-align: center; margin-bottom: 1.5rem; }
-    .hero img { width: 7rem; max-width: 100%; height: auto; }
+    .hero img { width: 5rem; max-width: 100%; height: auto; padding: .35rem; background: #fff; border-radius: .75rem; }
     .hero h1 { margin-top: .5rem; }
     section.card + section.card { margin-top: 1.5rem; }
     h2 { margin: 0 0 1rem; font-size: 1.35rem; line-height: 1.3; }
