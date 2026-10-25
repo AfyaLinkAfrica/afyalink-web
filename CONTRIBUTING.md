@@ -173,7 +173,6 @@ Issues may use labels such as:
 | `security` | Security-related work requiring appropriate handling |
 | `healthcare-review` | Review by a qualified healthcare professional |
 
-Issue labels will be added as the project grows.
 
 If you would like to work on an issue, comment on it to let maintainers know.
 
@@ -220,7 +219,7 @@ cd afyalink-web
 
 ### 4. Add the Upstream Repository
 
-After confirming the official repository URL, add it as the upstream remote.
+Add the main repository as the upstream remote so you can pull in the latest changes.
 
 ```bash
 git remote add upstream https://github.com/AfyaLinkAfrica/afyalink-web.git

@@ -309,11 +309,11 @@ Before running the application, you will need:
 - Node.js and npm if frontend assets require them.
 - Git.
 
-The exact version requirements will be published after the initial application is established.
+Requires PHP 8.2 or newer (CI runs on PHP 8.3). See `composer.json` for the exact requirements.
 
 ### Installation
 
-The following commands describe the intended Laravel setup. They assume that the repository contains a working Laravel application and its dependency files.
+These commands set up a local development copy of the application.
 
 **1. Clone the repository**
 
@@ -321,7 +321,7 @@ The following commands describe the intended Laravel setup. They assume that the
 git clone https://github.com/AfyaLinkAfrica/afyalink-web.git
 ```
 
-Replace the repository address with the official repository URL once it has been created.
+To contribute, fork the repository first and clone your fork instead (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 **2. Enter the project directory**
 
@@ -375,7 +375,6 @@ php artisan serve
 
 Open the local address displayed by Laravel in your browser.
 
-If the repository is documentation-only or the application is not yet implemented, these instructions will become applicable when the initial Laravel application is committed.
 
 ---
 
@@ -534,8 +533,8 @@ Whether you are a developer in Kenya, a healthcare professional in India, a desi
 
 ### Connect With Us
 
-- **GitHub:** Add the official organization link when available.
-- **Project discussions:** Use the repository's GitHub Discussions feature when enabled.
+- **GitHub:** [github.com/AfyaLinkAfrica](https://github.com/AfyaLinkAfrica)
+- **Project discussions:** [GitHub Discussions](https://github.com/AfyaLinkAfrica/afyalink-web/discussions)
 - **Technical contributions:** Open an issue or submit a pull request.
 - **Partnerships and general enquiries:** Email [dantechdevs@gmail.com](mailto:dantechdevs@gmail.com).
 - **Security concerns:** Email [dantechdevs@gmail.com](mailto:dantechdevs@gmail.com) with the subject line "AfyaLink Security". Do not post vulnerabilities publicly.
