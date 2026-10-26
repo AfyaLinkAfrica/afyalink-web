@@ -65,6 +65,13 @@
                         @if ($facility->phone)
                             <p>{{ __('facilities.call') }}: <a href="tel:{{ preg_replace('/[^\d+]/', '', $facility->phone) }}">{{ $facility->phone }}</a></p>
                         @endif
+                        @if ($facility->services->isNotEmpty())
+                            <ul class="services" aria-label="{{ __('facilities.services') }}">
+                                @foreach ($facility->services as $service)
+                                    <li>{{ $service->name }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </article>
                 </li>
             @endforeach

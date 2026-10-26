@@ -13,6 +13,7 @@
             --muted: #4b5563;
             --brand: #0f766e;
             --brand-dark: #115e59;
+            --on-brand: #ffffff;
             --border: #d1e7df;
             --alert-bg: #fff7ed;
             --alert-text: #7c2d12;
@@ -26,6 +27,7 @@
                 --muted: #a7c7c0;
                 --brand: #34d399;
                 --brand-dark: #6ee7b7;
+                --on-brand: #04201c;
                 --border: #1f4a42;
                 --alert-bg: #3b1d0e;
                 --alert-text: #fed7aa;
@@ -51,7 +53,7 @@
             top: 0;
             padding: .5rem 1rem;
             background: var(--brand);
-            color: #fff;
+            color: var(--on-brand);
             z-index: 10;
         }
         .skip-link:focus { left: 0; }
@@ -98,7 +100,7 @@
             text-decoration: none;
             border: 2px solid var(--brand);
         }
-        a.primary { background: var(--brand); color: #fff; }
+        a.primary { background: var(--brand); color: var(--on-brand); }
         a.secondary { color: var(--brand-dark); }
         .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0; }
         .badge {
@@ -111,6 +113,8 @@
             color: var(--brand-dark);
         }
         .badge.warn { color: var(--alert-text); background: var(--alert-bg); border-color: var(--alert-border); }
+        ul.services { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0 0; padding: 0; list-style: none; }
+        ul.services li { padding: .1rem .6rem; font-size: .85rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; }
         .notice {
             margin: 0 0 1rem;
             padding: .75rem 1rem;
