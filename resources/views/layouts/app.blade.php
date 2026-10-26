@@ -113,6 +113,38 @@
             color: var(--brand-dark);
         }
         .badge.warn { color: var(--alert-text); background: var(--alert-bg); border-color: var(--alert-border); }
+        .field { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: .25rem; font-weight: 600; }
+        select, input[type="text"], textarea {
+            width: 100%;
+            min-height: 2.75rem;
+            padding: .5rem .75rem;
+            font: inherit;
+            color: var(--text);
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: .5rem;
+        }
+        textarea { resize: vertical; }
+        select:focus-visible, input[type="text"]:focus-visible, textarea:focus-visible, button:focus-visible {
+            outline: 3px solid var(--brand-dark);
+            outline-offset: 2px;
+        }
+        button.button {
+            min-height: 2.75rem;
+            padding: .7rem 1.2rem;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--on-brand);
+            background: var(--brand);
+            border: 2px solid var(--brand);
+            border-radius: .5rem;
+        }
+        .help { margin: .25rem 0 0; font-size: .875rem; }
+        .error { margin: .35rem 0 0; font-size: .9rem; font-weight: 600; color: var(--alert-text); }
+        .notice.success { color: var(--brand-dark); background: var(--card); border-color: var(--brand); }
+        .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
         ul.services { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0 0; padding: 0; list-style: none; }
         ul.services li { padding: .1rem .6rem; font-size: .85rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; }
         .notice {
