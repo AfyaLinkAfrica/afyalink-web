@@ -33,6 +33,14 @@ class FacilityController extends Controller
     }
 
     /**
+     * Show one facility. Route-model binding returns a 404 for unknown ids.
+     */
+    public function show(Facility $facility): View
+    {
+        return view('facilities.show', ['facility' => $facility]);
+    }
+
+    /**
      * Read the search filters from the query string.
      * Unknown counties or types, and non-text values, are ignored rather than rejected.
      *

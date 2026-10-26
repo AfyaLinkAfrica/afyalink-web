@@ -29,6 +29,15 @@ return [
     'next' => 'Next',
     'page_of' => 'Page :current of :last',
 
+    'back' => 'Back to all facilities',
+    'sub_county' => 'Sub-county',
+    'address' => 'Address',
+    'phone' => 'Phone',
+    'last_verified' => 'Last verified',
+    'location' => 'Location',
+    'open_map' => 'Open in OpenStreetMap',
+    'unverified_note' => 'This information has not been verified yet. Please call ahead to confirm before you travel.',
+
     'types' => [
         'hospital' => 'Hospital',
         'health_centre' => 'Health centre',

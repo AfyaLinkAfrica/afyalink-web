@@ -100,6 +100,27 @@
         }
         a.primary { background: var(--brand); color: #fff; }
         a.secondary { color: var(--brand-dark); }
+        .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0; }
+        .badge {
+            display: inline-block;
+            padding: .15rem .6rem;
+            font-size: .8rem;
+            font-weight: 700;
+            border: 2px solid var(--border);
+            border-radius: 999px;
+            color: var(--brand-dark);
+        }
+        .badge.warn { color: var(--alert-text); background: var(--alert-bg); border-color: var(--alert-border); }
+        .notice {
+            margin: 0 0 1rem;
+            padding: .75rem 1rem;
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--alert-text);
+            background: var(--alert-bg);
+            border: 1px solid var(--alert-border);
+            border-radius: .5rem;
+        }
         footer.site-footer {
             padding: 1.25rem 1.5rem;
             font-size: .875rem;
