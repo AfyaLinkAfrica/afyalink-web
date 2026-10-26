@@ -2,8 +2,7 @@
 
 return [
     'heading' => 'Health facilities',
-    'coming_soon' => 'The searchable facility directory is being built in the open. Follow progress or help on GitHub.',
-    'view_issues' => 'See open issues',
+    'in_county' => 'Facilities in :county',
 
     'county' => 'County',
     'any_county' => 'Any county',
@@ -12,7 +11,23 @@ return [
     'name' => 'Facility name (optional)',
     'name_placeholder' => 'For example: Machakos Level 5',
     'search_button' => 'Search facilities',
-    'in_county' => 'Facilities in :county',
+    'search_label' => 'Search for a health facility',
+
+    'results_count' => '{0} No facilities found|{1} 1 facility found|[2,*] :count facilities found',
+    'no_results' => 'No facilities match your search. Try a different county, type, or name.',
+    'clear_filters' => 'Clear search and show all facilities',
+
+    'demo_badge' => 'Demo data',
+    'demo_notice' => 'Demo data: the facilities shown here are fictional examples used for development. Do not use them to find real care.',
+
+    'verified_on' => 'Verified on :date',
+    'not_verified' => 'Not yet verified',
+    'call' => 'Call',
+
+    'pagination' => 'Pages of results',
+    'previous' => 'Previous',
+    'next' => 'Next',
+    'page_of' => 'Page :current of :last',
 
     'types' => [
         'hospital' => 'Hospital',

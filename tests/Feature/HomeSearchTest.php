@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\Facility;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class HomeSearchTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_home_page_has_an_accessible_search_form(): void
     {
         $response = $this->get(route('home'));

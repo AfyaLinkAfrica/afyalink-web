@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LayoutTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_home_page_uses_the_shared_layout(): void
     {
         $response = $this->get(route('home'));
