@@ -9,5 +9,6 @@ return [
     'issues' => 'Good first issues',
     'search_heading' => 'Find a health facility',
     'browse_heading' => 'Browse by county',
+    'browse_services_heading' => 'Browse by service',
     'about_heading' => 'About the project',
 ];

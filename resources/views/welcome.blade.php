@@ -7,8 +7,8 @@
     .hero h1 { margin-top: .5rem; }
     section.card + section.card { margin-top: 1.5rem; }
     h2 { margin: 0 0 1rem; font-size: 1.35rem; line-height: 1.3; }
-    ul.county-links { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
-    ul.county-links a {
+    ul.chip-links { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+    ul.chip-links a {
         display: inline-block;
         padding: .45rem .9rem;
         font-weight: 600;
@@ -28,17 +28,28 @@
 
     <section class="card" aria-labelledby="search-heading">
         <h2 id="search-heading">{{ __('home.search_heading') }}</h2>
-        @include('partials.facility-search', ['filters' => []])
+        @include('partials.facility-search', ['filters' => [], 'services' => $services])
     </section>
 
     <section class="card" aria-labelledby="browse-heading">
         <h2 id="browse-heading">{{ __('home.browse_heading') }}</h2>
-        <ul class="county-links">
+        <ul class="chip-links">
             @foreach (config('afyalink.featured_counties') as $county)
                 <li><a href="{{ route('facilities.index', ['county' => $county]) }}">{{ $county }}</a></li>
             @endforeach
         </ul>
     </section>
+
+    @if ($services->isNotEmpty())
+        <section class="card" aria-labelledby="browse-services-heading">
+            <h2 id="browse-services-heading">{{ __('home.browse_services_heading') }}</h2>
+            <ul class="chip-links">
+                @foreach ($services as $service)
+                    <li><a href="{{ route('facilities.index', ['service' => $service->slug]) }}">{{ $service->name }}</a></li>
+                @endforeach
+            </ul>
+        </section>
+    @endif
 
     <section class="card" aria-labelledby="about-heading">
         <h2 id="about-heading">{{ __('home.about_heading') }}</h2>

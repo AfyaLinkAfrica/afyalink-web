@@ -50,6 +50,17 @@
                 <dd><a href="tel:{{ preg_replace('/[^\d+]/', '', $facility->phone) }}">{{ $facility->phone }}</a></dd>
             @endif
 
+            @if ($facility->services->isNotEmpty())
+                <dt>{{ __('facilities.services') }}</dt>
+                <dd>
+                    <ul class="services">
+                        @foreach ($facility->services as $service)
+                            <li>{{ $service->name }}</li>
+                        @endforeach
+                    </ul>
+                </dd>
+            @endif
+
             <dt>{{ __('facilities.last_verified') }}</dt>
             <dd>{{ $facility->isVerified() ? $facility->verified_at->translatedFormat('j F Y') : __('facilities.not_verified') }}</dd>
 

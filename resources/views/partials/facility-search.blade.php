@@ -22,7 +22,7 @@
         font: inherit;
         font-weight: 600;
         cursor: pointer;
-        color: #fff;
+        color: var(--on-brand);
         background: var(--brand);
         border: 2px solid var(--brand);
         border-radius: .5rem;
@@ -50,6 +50,18 @@
             @endforeach
         </select>
     </div>
+
+    @if (isset($services) && $services->isNotEmpty())
+        <div class="field">
+            <label for="service">{{ __('facilities.service') }}</label>
+            <select id="service" name="service">
+                <option value="">{{ __('facilities.any_service') }}</option>
+                @foreach ($services as $service)
+                    <option value="{{ $service->slug }}" @selected(($filters['service'] ?? null) === $service->slug)>{{ $service->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    @endif
 
     <div class="field">
         <label for="q">{{ __('facilities.name') }}</label>

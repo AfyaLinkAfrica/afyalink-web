@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Facility extends Model
 {
@@ -44,6 +45,11 @@ class Facility extends Model
         'verified_at' => 'datetime',
     ];
 
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class);
+    }
+
     public function isVerified(): bool
     {
         return $this->verified_at !== null;
@@ -74,5 +80,16 @@ class Facility extends Model
         $term = trim(str_replace(['%', '_'], ' ', (string) $term));
 
         return $term === '' ? $query : $query->where('name', 'like', '%'.$term.'%');
+    }
+
+    /**
+     * Limit results to facilities offering one service (matched by slug).
+     * A null value leaves the query unchanged.
+     */
+    public function scopeOfferingService(Builder $query, ?string $slug): Builder
+    {
+        return $slug === null
+            ? $query
+            : $query->whereHas('services', fn (Builder $services) => $services->where('slug', $slug));
     }
 }
