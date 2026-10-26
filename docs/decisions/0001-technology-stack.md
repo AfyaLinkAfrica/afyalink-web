@@ -6,7 +6,7 @@
 AfyaLink Africa must run on modest hosting, load fast on low-end phones and slow connections, and be easy for volunteers to contribute to.
 
 ## Decision
-- **Backend:** Laravel (PHP), MySQL for local development and production. Automated tests run on in-memory SQLite for speed and zero setup.
+- **Backend:** Laravel (PHP), MySQL for local development and production. Automated tests run on in-memory SQLite locally for speed and zero setup, and CI also runs the full suite against MySQL 8.
 - **Frontend:** Blade templates and Bootstrap, with minimal JavaScript. Core pages must work without JavaScript.
 - **Testing:** Pest or PHPUnit, with Laravel Pint for code style
 - **CI:** GitHub Actions
