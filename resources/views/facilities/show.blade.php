@@ -22,6 +22,10 @@
         <p class="notice" role="note">{{ __('facilities.demo_notice') }}</p>
     @endif
 
+    @if (session('report_submitted'))
+        <p class="notice success" role="status">{{ __('reports.thanks') }}</p>
+    @endif
+
     <article class="card">
         <h1>{{ $facility->name }}</h1>
 
@@ -69,5 +73,7 @@
                 <dd><a href="https://www.openstreetmap.org/?mlat={{ $facility->latitude }}&amp;mlon={{ $facility->longitude }}#map=16/{{ $facility->latitude }}/{{ $facility->longitude }}">{{ __('facilities.open_map') }}</a></dd>
             @endif
         </dl>
+
+        <p><a href="{{ route('facilities.report.create', $facility) }}">{{ __('reports.link') }}</a></p>
     </article>
 @endsection
