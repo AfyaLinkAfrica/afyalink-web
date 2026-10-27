@@ -1,35 +1,3 @@
-@push('styles')
-<style>
-    .field { margin-bottom: 1rem; }
-    label { display: block; margin-bottom: .25rem; font-weight: 600; }
-    select, input[type="text"] {
-        width: 100%;
-        min-height: 2.75rem;
-        padding: .5rem .75rem;
-        font: inherit;
-        color: var(--text);
-        background: var(--bg);
-        border: 2px solid var(--border);
-        border-radius: .5rem;
-    }
-    select:focus-visible, input[type="text"]:focus-visible, button:focus-visible {
-        outline: 3px solid var(--brand-dark);
-        outline-offset: 2px;
-    }
-    button.button {
-        min-height: 2.75rem;
-        padding: .7rem 1.2rem;
-        font: inherit;
-        font-weight: 600;
-        cursor: pointer;
-        color: var(--on-brand);
-        background: var(--brand);
-        border: 2px solid var(--brand);
-        border-radius: .5rem;
-    }
-</style>
-@endpush
-
 <form method="get" action="{{ route('facilities.index') }}" role="search" aria-label="{{ __('facilities.search_label') }}">
     <div class="field">
         <label for="county">{{ __('facilities.county') }}</label>
