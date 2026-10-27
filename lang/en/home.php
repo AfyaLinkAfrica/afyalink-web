@@ -11,4 +11,8 @@ return [
     'browse_heading' => 'Browse by county',
     'browse_services_heading' => 'Browse by service',
     'about_heading' => 'About the project',
+    'how_heading' => 'How it works',
+    'how_step_1' => 'Search by county, facility type, service, or name.',
+    'how_step_2' => 'Open a facility to see its details and when its information was last verified.',
+    'how_step_3' => 'Call the facility to confirm before you travel.',
 ];

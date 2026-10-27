@@ -7,6 +7,8 @@
     .hero h1 { margin-top: .5rem; }
     section.card + section.card { margin-top: 1.5rem; }
     h2 { margin: 0 0 1rem; font-size: 1.35rem; line-height: 1.3; }
+    ol.steps { margin: 0; padding-left: 1.4rem; }
+    ol.steps li { margin: .5rem 0; color: var(--muted); }
     ul.chip-links { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
     ul.chip-links a {
         display: inline-block;
@@ -21,7 +23,7 @@
 
 @section('content')
     <section class="hero">
-        <img src="{{ asset('images/logo.png') }}" alt="{{ __('home.title') }} logo">
+        <img src="{{ asset('images/logo.png') }}" alt="{{ __('home.title') }} logo" width="400" height="400">
         <h1>{{ __('home.title') }}</h1>
         <p class="tagline">{{ __('home.tagline') }}</p>
     </section>
@@ -50,6 +52,15 @@
             </ul>
         </section>
     @endif
+
+    <section class="card" aria-labelledby="how-heading">
+        <h2 id="how-heading">{{ __('home.how_heading') }}</h2>
+        <ol class="steps">
+            <li>{{ __('home.how_step_1') }}</li>
+            <li>{{ __('home.how_step_2') }}</li>
+            <li>{{ __('home.how_step_3') }}</li>
+        </ol>
+    </section>
 
     <section class="card" aria-labelledby="about-heading">
         <h2 id="about-heading">{{ __('home.about_heading') }}</h2>
