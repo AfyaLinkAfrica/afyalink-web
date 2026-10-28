@@ -76,4 +76,6 @@
 
         <p><a href="{{ route('facilities.report.create', $facility) }}">{{ __('reports.link') }}</a></p>
     </article>
+
+    @include('partials.facility-map', ['facility' => $facility, 'mapUrl' => $mapUrl])
 @endsection

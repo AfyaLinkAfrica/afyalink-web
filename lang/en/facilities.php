@@ -39,6 +39,12 @@ return [
     'last_verified' => 'Last verified',
     'location' => 'Location',
     'open_map' => 'Open in OpenStreetMap',
+    'map' => 'Map',
+    'show_map' => 'Show map',
+    'hide_map' => 'Hide map',
+    'map_title' => 'Map showing the location of this facility',
+    'map_privacy' => 'The map is loaded from OpenStreetMap, which will see your IP address. It is not loaded unless you choose to show it.',
+    'map_credit' => 'Map data from OpenStreetMap contributors.',
     'unverified_note' => 'This information has not been verified yet. Please call ahead to confirm before you travel.',
 
     'types' => [
