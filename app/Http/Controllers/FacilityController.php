@@ -41,11 +41,40 @@ class FacilityController extends Controller
     /**
      * Show one facility. Route-model binding returns a 404 for unknown ids.
      */
-    public function show(Facility $facility): View
+    public function show(Request $request, Facility $facility): View
     {
         $facility->load(['services' => fn ($query) => $query->orderBy('name')]);
 
-        return view('facilities.show', ['facility' => $facility]);
+        return view('facilities.show', [
+            'facility' => $facility,
+            'mapUrl' => $this->mapUrl($request, $facility),
+        ]);
+    }
+
+    /**
+     * The map is only embedded when the visitor asks for it (?map=1), so nothing is
+     * requested from OpenStreetMap, and no visitor address is shared, until they choose to.
+     */
+    private function mapUrl(Request $request, Facility $facility): ?string
+    {
+        if ($request->query('map') !== '1' || $facility->latitude === null || $facility->longitude === null) {
+            return null;
+        }
+
+        $latitude = (float) $facility->latitude;
+        $longitude = (float) $facility->longitude;
+        $margin = 0.01;
+
+        return 'https://www.openstreetmap.org/export/embed.html?'.http_build_query([
+            'bbox' => implode(',', [
+                round($longitude - $margin, 5),
+                round($latitude - $margin, 5),
+                round($longitude + $margin, 5),
+                round($latitude + $margin, 5),
+            ]),
+            'layer' => 'mapnik',
+            'marker' => $latitude.','.$longitude,
+        ]);
     }
 
     /**
