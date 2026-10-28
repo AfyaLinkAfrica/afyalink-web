@@ -21,7 +21,17 @@ class ResolveReport extends Command
             return self::FAILURE;
         }
 
-        $report->update(['status' => Report::STATUS_RESOLVED]);
+        // Resolving twice must not restart the 90-day retention clock.
+        if ($report->status === Report::STATUS_RESOLVED) {
+            $this->info("Report {$report->id} was already resolved.");
+
+            return self::SUCCESS;
+        }
+
+        $report->update([
+            'status' => Report::STATUS_RESOLVED,
+            'resolved_at' => now(),
+        ]);
         $this->info("Report {$report->id} marked as resolved.");
 
         return self::SUCCESS;

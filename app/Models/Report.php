@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * A visitor's report that a facility's information is wrong or missing.
  * Deliberately stores no IP address and no account: only the message and an optional contact.
+ * Resolved reports are deleted automatically 90 days after resolved_at (see reports:prune).
  */
 class Report extends Model
 {
@@ -22,6 +23,11 @@ class Report extends Model
         'message',
         'contact',
         'status',
+        'resolved_at',
+    ];
+
+    protected $casts = [
+        'resolved_at' => 'datetime',
     ];
 
     public function facility(): BelongsTo
