@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
@@ -17,6 +18,12 @@ Route::get('/facilities/{facility}/report', [ReportController::class, 'create'])
 Route::post('/facilities/{facility}/report', [ReportController::class, 'store'])
     ->middleware('throttle:5,10')
     ->name('facilities.report.store');
+
+// Plain-language search helper. It only turns words into the existing search filters.
+Route::get('/assistant', [AssistantController::class, 'show'])->name('assistant.show');
+Route::post('/assistant', [AssistantController::class, 'ask'])
+    ->middleware('throttle:20,1')
+    ->name('assistant.ask');
 
 // Maintainer area. Not linked from any public page. Accounts are created with `php artisan admin:create`.
 Route::prefix('admin')->middleware(PrivateAdminPage::class)->group(function () {
