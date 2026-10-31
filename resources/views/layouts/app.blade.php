@@ -167,6 +167,7 @@
         footer.site-footer p { margin: .35rem 0; }
     </style>
     @stack('styles')
+    @include('partials.pwa-head')
 </head>
 <body>
     <a class="skip-link" href="#main-content">{{ __('layout.skip_to_content') }}</a>
@@ -194,5 +195,6 @@
             <a href="https://github.com/AfyaLinkAfrica/afyalink-web">{{ __('layout.footer_github') }}</a>
         </p>
     </footer>
+    @include('partials.pwa-script')
 </body>
 </html>

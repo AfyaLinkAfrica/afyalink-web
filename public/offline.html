@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>You are offline | AfyaLink Africa</title>
+    <meta name="robots" content="noindex">
+    <style>
+        :root { --bg: #f7faf8; --card: #ffffff; --text: #1f2937; --muted: #4b5563; --brand: #0f766e; --brand-dark: #115e59; --on-brand: #ffffff; --border: #d1e7df; --alert-bg: #fff7ed; --alert-text: #7c2d12; --alert-border: #fdba74; }
+        @media (prefers-color-scheme: dark) {
+            :root { --bg: #0b1f1c; --card: #11302b; --text: #e6f4f1; --muted: #a7c7c0; --brand: #34d399; --brand-dark: #6ee7b7; --on-brand: #04201c; --border: #1f4a42; --alert-bg: #3b1d0e; --alert-text: #fed7aa; --alert-border: #9a3412; }
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .emergency { padding: .6rem 1rem; text-align: center; font-size: .9rem; font-weight: 600; background: var(--alert-bg); color: var(--alert-text); border-bottom: 1px solid var(--alert-border); }
+        main { flex: 1; width: 100%; max-width: 48rem; margin: 0 auto; padding: 2rem 1.5rem; }
+        .card { padding: 2rem 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 1rem; }
+        h1 { margin: 0 0 .5rem; font-size: 2rem; line-height: 1.2; }
+        p { margin: .75rem 0; color: var(--muted); }
+        a.button { display: inline-block; margin-top: .75rem; padding: .7rem 1.2rem; border-radius: .5rem; font-weight: 600; text-decoration: none; color: var(--on-brand); background: var(--brand); border: 2px solid var(--brand); }
+        a:focus-visible { outline: 3px solid var(--brand-dark); outline-offset: 2px; }
+    </style>
+</head>
+<body>
+    <div class="emergency" role="note">In an emergency, contact your local emergency services or go to the nearest health facility.</div>
+    <main>
+        <section class="card">
+            <h1>You are offline</h1>
+            <p>AfyaLink needs an internet connection to search for facilities. Your connection may be slow or lost.</p>
+            <p>Pages you opened before may still open from your device. They can be out of date, so call a facility to confirm before you travel.</p>
+            <a class="button" href="/">Try again</a>
+        </section>
+    </main>
+</body>
+</html>
