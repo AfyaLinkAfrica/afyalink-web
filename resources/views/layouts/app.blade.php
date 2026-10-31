@@ -35,6 +35,7 @@
             }
         }
         * { box-sizing: border-box; }
+        html { scroll-padding-top: 5rem; }
         body {
             margin: 0;
             min-height: 100vh;
@@ -54,7 +55,7 @@
             padding: .5rem 1rem;
             background: var(--brand);
             color: var(--on-brand);
-            z-index: 10;
+            z-index: 30;
         }
         .skip-link:focus { left: 0; }
         .emergency {
@@ -71,15 +72,43 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: .75rem;
-            padding: .75rem 1.5rem;
+            gap: .25rem .75rem;
+            padding: .5rem 1.5rem;
             background: var(--card);
             border-bottom: 1px solid var(--border);
         }
-        .brand { font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--brand); }
+        @media (min-width: 40rem) {
+            header.site-header { position: sticky; top: 0; z-index: 20; }
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            min-height: 2.75rem;
+            font-weight: 700;
+            font-size: 1.15rem;
+            text-decoration: none;
+            color: var(--brand);
+        }
+        .brand-mark { flex: none; }
         nav ul { display: flex; gap: 1rem; margin: 0; padding: 0; list-style: none; }
         nav a { text-decoration: none; font-weight: 600; padding: .25rem .1rem; border-bottom: 2px solid transparent; }
         nav a[aria-current="page"] { border-bottom-color: var(--brand); }
+        header.site-header nav ul { gap: .25rem; }
+        header.site-header nav a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.75rem;
+            padding: .25rem .9rem;
+            border-radius: .5rem;
+        }
+        header.site-header nav a:hover { background: var(--bg); }
+        header.site-header nav a[aria-current="page"] { color: var(--on-brand); background: var(--brand); border-bottom-color: transparent; }
+        @media (max-width: 39.99rem) {
+            header.site-header nav, header.site-header nav ul { width: 100%; }
+            header.site-header nav li { flex: 1; }
+            header.site-header nav a { justify-content: center; width: 100%; }
+        }
         main { flex: 1; width: 100%; max-width: 48rem; margin: 0 auto; padding: 2rem 1.5rem; }
         .card {
             padding: 2rem 1.5rem;
@@ -158,13 +187,35 @@
             border-radius: .5rem;
         }
         footer.site-footer {
-            padding: 1.25rem 1.5rem;
-            font-size: .875rem;
-            text-align: center;
+            padding: 2rem 1.5rem 1.25rem;
+            font-size: .9rem;
+            text-align: left;
             background: var(--card);
             border-top: 1px solid var(--border);
         }
         footer.site-footer p { margin: .35rem 0; }
+        footer.site-footer .footer-grid { display: grid; gap: 1.5rem; max-width: 48rem; margin: 0 auto; }
+        @media (min-width: 40rem) {
+            footer.site-footer .footer-grid { grid-template-columns: 2fr 1fr 2fr; }
+        }
+        footer.site-footer h2.footer-title {
+            margin: 0 0 .5rem;
+            font-size: .8rem;
+            line-height: 1.3;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+        footer.site-footer nav ul { display: block; margin: 0; padding: 0; list-style: none; }
+        footer.site-footer nav li { margin: .1rem 0; }
+        footer.site-footer nav a { display: inline-block; padding: .25rem 0; border-bottom: 0; text-decoration: underline; }
+        footer.site-footer .footer-bottom {
+            max-width: 48rem;
+            margin: 1.5rem auto 0;
+            padding-top: 1rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
     </style>
     @stack('styles')
     @include('partials.pwa-head')
@@ -175,11 +226,17 @@
     <div class="emergency" role="note">{{ __('layout.emergency') }}</div>
 
     <header class="site-header">
-        <a class="brand" href="{{ route('home') }}">{{ __('layout.site_name') }}</a>
+        <a class="brand" href="{{ route('home') }}">
+            <svg class="brand-mark" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><rect width="28" height="28" rx="7" fill="currentColor"/><path d="M12 6h4v6h6v4h-6v6h-4v-6H6v-4h6z" fill="var(--on-brand)"/></svg>
+            <span>{{ __('layout.site_name') }}</span>
+        </a>
         <nav aria-label="{{ __('layout.nav_label') }}">
             <ul>
                 <li><a href="{{ route('home') }}" @if (request()->routeIs('home')) aria-current="page" @endif>{{ __('layout.nav_home') }}</a></li>
                 <li><a href="{{ route('facilities.index') }}" @if (request()->routeIs('facilities.*')) aria-current="page" @endif>{{ __('layout.nav_facilities') }}</a></li>
+                @if (\Illuminate\Support\Facades\Route::has('assistant.show'))
+                    <li><a href="{{ route('assistant.show') }}" @if (request()->routeIs('assistant.*')) aria-current="page" @endif>{{ __('layout.nav_ask') }}</a></li>
+                @endif
             </ul>
         </nav>
     </header>
@@ -189,8 +246,31 @@
     </main>
 
     <footer class="site-footer">
-        <p>{{ __('layout.disclaimer') }}</p>
-        <p>
+        <div class="footer-grid">
+            <div>
+                <h2 class="footer-title">{{ __('layout.footer_about') }}</h2>
+                <p>{{ __('layout.disclaimer') }}</p>
+                <p>{{ __('layout.footer_data_note') }}</p>
+            </div>
+
+            <nav aria-label="{{ __('layout.footer_nav_label') }}">
+                <h2 class="footer-title">{{ __('layout.footer_explore') }}</h2>
+                <ul>
+                    <li><a href="{{ route('home') }}">{{ __('layout.nav_home') }}</a></li>
+                    <li><a href="{{ route('facilities.index') }}">{{ __('layout.nav_facilities') }}</a></li>
+                    @if (\Illuminate\Support\Facades\Route::has('assistant.show'))
+                        <li><a href="{{ route('assistant.show') }}">{{ __('layout.nav_ask') }}</a></li>
+                    @endif
+                </ul>
+            </nav>
+
+            <div>
+                <h2 class="footer-title">{{ __('layout.footer_help') }}</h2>
+                <p>{{ __('layout.footer_mistake') }}</p>
+            </div>
+        </div>
+
+        <p class="footer-bottom">
             {{ __('layout.footer_open_source') }}
             <a href="https://github.com/AfyaLinkAfrica/afyalink-web">{{ __('layout.footer_github') }}</a>
         </p>
