@@ -106,10 +106,20 @@
         }
         header.site-header nav a:hover { background: var(--bg); }
         header.site-header nav a[aria-current="page"] { color: var(--on-brand); background: var(--brand); border-bottom-color: transparent; }
+        header.site-header nav .current {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.75rem;
+            padding: .25rem .9rem;
+            border-radius: .5rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            border: 2px solid var(--brand);
+        }
         @media (max-width: 39.99rem) {
             header.site-header nav, header.site-header nav ul { width: 100%; }
             header.site-header nav li { flex: 1; }
-            header.site-header nav a { justify-content: center; width: 100%; }
+            header.site-header nav a, header.site-header nav .current { justify-content: center; width: 100%; }
         }
         main { flex: 1; width: 100%; max-width: 48rem; margin: 0 auto; padding: 2rem 1.5rem; }
         .card {
@@ -240,6 +250,19 @@
                 @if (\Illuminate\Support\Facades\Route::has('assistant.show'))
                     <li><a href="{{ route('assistant.show') }}" @if (request()->routeIs('assistant.*')) aria-current="page" @endif>{{ __('layout.nav_ask') }}</a></li>
                 @endif
+            </ul>
+        </nav>
+        <nav class="lang-switch" aria-label="{{ __('layout.language_label') }}">
+            <ul>
+                @foreach (config('afyalink.locales') as $code => $name)
+                    <li>
+                        @if ($code === app()->getLocale())
+                            <span class="current" lang="{{ $code }}" aria-current="true">{{ $name }}</span>
+                        @else
+                            <a href="{{ route('locale.switch', ['locale' => $code, 'return' => request()->getRequestUri()]) }}" lang="{{ $code }}" hreflang="{{ $code }}">{{ $name }}</a>
+                        @endif
+                    </li>
+                @endforeach
             </ul>
         </nav>
     </header>

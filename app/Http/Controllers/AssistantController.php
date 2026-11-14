@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Support\Assistant\EmergencyDetector;
 use App\Support\Assistant\RuleBasedExtractor;
 use App\Support\Assistant\Understanding;
@@ -83,7 +84,7 @@ class AssistantController extends Controller
         }
 
         if ($service = $understanding->service()) {
-            $rows[] = ['label' => __('facilities.service'), 'value' => $service['name']];
+            $rows[] = ['label' => __('facilities.service'), 'value' => Service::label($service['slug'], $service['name'])];
         }
 
         return $rows;
@@ -125,7 +126,7 @@ class AssistantController extends Controller
             $choices[] = [
                 'question' => __('assistant.choose_service'),
                 'links' => array_map(fn (array $option) => [
-                    'text' => $option['name'],
+                    'text' => Service::label($option['slug'], $option['name']),
                     'url' => route('facilities.index', Understanding::query($county, $type, $option['slug'])),
                 ], $understanding->services),
             ];

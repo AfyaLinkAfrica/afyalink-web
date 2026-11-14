@@ -23,7 +23,7 @@
 
 @section('content')
     <section class="hero">
-        <img src="{{ asset('images/logo.png') }}" alt="{{ __('home.title') }} logo" width="400" height="400">
+        <img src="{{ asset('images/logo.png') }}" alt="{{ __('home.logo_alt', ['name' => __('home.title')]) }}" width="400" height="400">
         <h1>{{ __('home.title') }}</h1>
         <p class="tagline">{{ __('home.tagline') }}</p>
     </section>
@@ -47,7 +47,7 @@
             <h2 id="browse-services-heading">{{ __('home.browse_services_heading') }}</h2>
             <ul class="chip-links">
                 @foreach ($services as $service)
-                    <li><a href="{{ route('facilities.index', ['service' => $service->slug]) }}">{{ $service->name }}</a></li>
+                    <li><a href="{{ route('facilities.index', ['service' => $service->slug]) }}">{{ $service->label }}</a></li>
                 @endforeach
             </ul>
         </section>

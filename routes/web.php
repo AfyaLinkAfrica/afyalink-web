@@ -5,11 +5,17 @@ use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ReportController;
 use App\Http\Middleware\PrivateAdminPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+// Language switcher. Only the locales in config/afyalink.php match; any other code is a 404.
+Route::get('/language/{locale}', LocaleController::class)
+    ->where('locale', implode('|', array_keys(config('afyalink.locales'))))
+    ->name('locale.switch');
 
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
 Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');

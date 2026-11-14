@@ -7,6 +7,7 @@ return [
     'nav_home' => 'Home',
     'nav_facilities' => 'Facilities',
     'nav_ask' => 'Ask',
+    'language_label' => 'Language',
     'emergency_label' => 'Emergency information',
     'emergency' => 'In an emergency, contact your local emergency services or go to the nearest health facility.',
     'disclaimer' => 'AfyaLink shares information only. It does not replace professional medical advice, diagnosis, or treatment.',

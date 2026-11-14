@@ -31,4 +31,19 @@ return [
         'Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Machakos', 'Kiambu',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Interface languages
+    |--------------------------------------------------------------------------
+    |
+    | The only locales a visitor can choose, as code => name written in that language.
+    | Each code needs a matching lang/<code> folder. Anything not listed here is rejected.
+    |
+    */
+
+    'locales' => [
+        'en' => 'English',
+        'sw' => 'Kiswahili',
+    ],
+
 ];

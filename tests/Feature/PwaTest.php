@@ -90,7 +90,7 @@ class PwaTest extends TestCase
 
     public function test_the_worker_never_stores_maintainer_pages_or_the_report_form(): void
     {
-        $this->assertStringContainsString("const NEVER_STORE_PATHS = ['/admin', '/report'];", $this->worker());
+        $this->assertStringContainsString("const NEVER_STORE_PATHS = ['/admin', '/report', '/language'];", $this->worker());
     }
 
     public function test_the_worker_never_stores_the_report_sent_page(): void

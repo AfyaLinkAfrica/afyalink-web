@@ -34,11 +34,11 @@
             <dd>{{ $report->status === 'new' ? __('admin.status_new') : __('admin.status_resolved') }}</dd>
 
             <dt>{{ __('admin.received_label') }}</dt>
-            <dd>{{ $report->created_at->format('j F Y, H:i') }}</dd>
+            <dd>{{ $report->created_at->translatedFormat('j F Y, H:i') }}</dd>
 
             @if ($report->resolved_at)
                 <dt>{{ __('admin.resolved_label') }}</dt>
-                <dd>{{ $report->resolved_at->format('j F Y, H:i') }}</dd>
+                <dd>{{ $report->resolved_at->translatedFormat('j F Y, H:i') }}</dd>
             @endif
 
             <dt>{{ __('admin.contact') }}</dt>

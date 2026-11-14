@@ -11,13 +11,13 @@
  *    network fails, is very slow, or the server is down.
  *  - A page shown from a saved copy always carries a visible notice with the save date.
  *  - Only GET requests to this site are handled. Everything else goes straight to the network.
- *  - Maintainer pages and the report form are never stored.
+ *  - Maintainer pages, the report form and the language switcher redirect are never stored.
  *  - A page showing the "report sent" thank-you notice is never stored.
  *
  * Bump VERSION whenever this file's behaviour changes, so old caches are removed.
  */
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const PAGES = 'afyalink-pages-' + VERSION;
 const STATIC = 'afyalink-static-' + VERSION;
 
@@ -28,7 +28,7 @@ const MAX_SAVED_PAGES = 40;
 const SLOW_NETWORK_MS = 4000;
 
 // Paths that must never be stored.
-const NEVER_STORE_PATHS = ['/admin', '/report'];
+const NEVER_STORE_PATHS = ['/admin', '/report', '/language'];
 
 // Markup of the thank-you notice shown after a report is sent. Pages containing it are not stored.
 const NO_STORE_MARKER = 'class="notice success"';
