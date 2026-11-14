@@ -13,6 +13,7 @@
  *  - Only GET requests to this site are handled. Everything else goes straight to the network.
  *  - Maintainer pages, the report form and the language switcher redirect are never stored.
  *  - A page showing the "report sent" thank-you notice is never stored.
+ *  - Choosing a language deletes all saved pages, because a saved page does not know its language.
  *
  * Bump VERSION whenever this file's behaviour changes, so old caches are removed.
  */
@@ -29,6 +30,9 @@ const SLOW_NETWORK_MS = 4000;
 
 // Paths that must never be stored.
 const NEVER_STORE_PATHS = ['/admin', '/report', '/language'];
+
+// Choosing a language goes through this path; see the fetch handler.
+const LANGUAGE_PATH = '/language/';
 
 // Markup of the thank-you notice shown after a report is sent. Pages containing it are not stored.
 const NO_STORE_MARKER = 'class="notice success"';
@@ -62,6 +66,15 @@ self.addEventListener('fetch', (event) => {
     const url = new URL(request.url);
 
     if (url.origin !== self.location.origin) {
+        return;
+    }
+
+    // Saved pages do not record their language, and the language cookie is HttpOnly so the worker
+    // cannot read it. When the visitor switches language, drop every saved page: the next visit
+    // is fetched from the network, in the new language. The request itself is left to the browser.
+    if (request.mode === 'navigate' && url.pathname.startsWith(LANGUAGE_PATH)) {
+        event.waitUntil(caches.delete(PAGES));
+
         return;
     }
 

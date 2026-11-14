@@ -118,4 +118,15 @@ class PwaTest extends TestCase
         // The worker file must always be fetched fresh so updates reach visitors.
         $this->assertStringContainsString("pathname === '/sw.js'", $this->worker());
     }
+
+    public function test_choosing_a_language_deletes_the_saved_pages(): void
+    {
+        $worker = $this->worker();
+
+        // Saved pages do not record their language and the worker cannot read the HttpOnly cookie,
+        // so a switch must drop them. The switch request itself is left to the browser.
+        $this->assertStringContainsString("const LANGUAGE_PATH = '/language/';", $worker);
+        $this->assertStringContainsString("request.mode === 'navigate' && url.pathname.startsWith(LANGUAGE_PATH)", $worker);
+        $this->assertStringContainsString('caches.delete(PAGES)', $worker);
+    }
 }
