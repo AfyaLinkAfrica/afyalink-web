@@ -60,6 +60,15 @@ class LanguageSwitcherTest extends TestCase
         $this->assertTrue($cookie->isHttpOnly());
     }
 
+    public function test_the_cookie_is_marked_secure_on_https_and_not_on_plain_http(): void
+    {
+        $plain = $this->get(route('locale.switch', ['locale' => 'sw']))->getCookie(SetLocale::COOKIE, false);
+        $this->assertFalse($plain->isSecure());
+
+        $secure = $this->get('https://afyalink.test/language/sw')->getCookie(SetLocale::COOKIE, false);
+        $this->assertTrue($secure->isSecure());
+    }
+
     public function test_the_choice_persists_across_requests(): void
     {
         $response = $this->get(route('locale.switch', ['locale' => 'sw']))->assertRedirect('/');
