@@ -260,7 +260,7 @@
                             @if ($code === app()->getLocale())
                                 <span class="current" lang="{{ $code }}" aria-current="true">{{ $name }}</span>
                             @else
-                                <a href="{{ route('locale.switch', ['locale' => $code, 'return' => request()->getRequestUri()]) }}" lang="{{ $code }}" hreflang="{{ $code }}">{{ $name }}</a>
+                                <a href="{{ route('locale.switch', ['locale' => $code, 'return' => request()->getRequestUri()]) }}" rel="nofollow" lang="{{ $code }}" hreflang="{{ $code }}">{{ $name }}</a>
                             @endif
                         </li>
                     @endforeach

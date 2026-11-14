@@ -16,6 +16,7 @@ The interface must be usable in English and Kiswahili (see ADR 0001). Health wor
 - Standard service names are translated in `lang/<locale>/services.php`, keyed by service slug. A service without an entry (for example one added by an import) shows its stored name.
 - Kiswahili health wording is marked with a `// healthcare-review` comment on the same line. Those lines must be approved by a fluent healthcare reviewer before Kiswahili is shown to the public. For that reason Kiswahili is off by default: set `AFYALINK_ENABLE_SWAHILI=true` once the review is done. While it is off, `en` is the only locale, the switcher is not shown and `/language/sw` is a 404.
 - The service worker deletes all saved pages when it sees a navigation to `/language/<code>`. A saved page does not record its language and the worker cannot read the `HttpOnly` cookie, so this stops an old-language copy from being shown after a switch.
+- Service names are sorted by the name shown in the active language, after fetching.
 
 ## Consequences
 - To add a language, add its code to `config/afyalink.php`, copy a `lang/` folder, and translate it. The key-parity test covers it.

@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function __invoke(): View
     {
         return view('welcome', [
-            'services' => Service::query()->orderBy('name')->get(['id', 'name', 'slug']),
+            'services' => Service::sortedByLabel(Service::query()->get(['id', 'name', 'slug'])),
         ]);
     }
 }

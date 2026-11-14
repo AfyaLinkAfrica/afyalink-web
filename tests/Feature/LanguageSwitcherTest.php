@@ -288,4 +288,26 @@ class LanguageSwitcherTest extends TestCase
             }
         }
     }
+
+    public function test_the_switch_links_are_not_followed_by_crawlers(): void
+    {
+        $this->get(route('home'))->assertSee('rel="nofollow" lang="sw" hreflang="sw"', false);
+    }
+
+    public function test_services_are_ordered_by_the_name_shown_in_the_chosen_language(): void
+    {
+        $outpatient = Service::factory()->create(['name' => 'Outpatient care', 'slug' => 'outpatient-care']);
+        $pharmacy = Service::factory()->create(['name' => 'Pharmacy', 'slug' => 'pharmacy']);
+        $facility = Facility::factory()->verified()->create();
+        $facility->services()->attach([$outpatient->id, $pharmacy->id]);
+
+        $english = [__('services.outpatient-care', [], 'en'), __('services.pharmacy', [], 'en')];
+        $swahili = [__('services.pharmacy', [], 'sw'), __('services.outpatient-care', [], 'sw')];
+
+        // "Duka la dawa" sorts before "Huduma za wagonjwa wa nje", the reverse of the English names.
+        $this->get(route('home'))->assertSeeInOrder($english);
+        $this->swahili()->get(route('home'))->assertSeeInOrder($swahili);
+        $this->swahili()->get(route('facilities.index'))->assertSeeInOrder($swahili);
+        $this->swahili()->get(route('facilities.show', $facility))->assertSeeInOrder($swahili);
+    }
 }
