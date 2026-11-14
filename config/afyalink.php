@@ -39,11 +39,15 @@ return [
     | The only locales a visitor can choose, as code => name written in that language.
     | Each code needs a matching lang/<code> folder. Anything not listed here is rejected.
     |
+    | Kiswahili is off until a fluent healthcare reviewer has approved the lines marked
+    | "healthcare-review" in lang/sw. Set AFYALINK_ENABLE_SWAHILI=true to turn it on.
+    | With one language enabled the language switcher is not shown.
+    |
     */
 
-    'locales' => [
+    'locales' => array_filter([
         'en' => 'English',
-        'sw' => 'Kiswahili',
-    ],
+        'sw' => env('AFYALINK_ENABLE_SWAHILI', false) ? 'Kiswahili' : null,
+    ]),
 
 ];

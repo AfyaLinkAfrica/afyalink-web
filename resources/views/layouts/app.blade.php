@@ -252,19 +252,21 @@
                 @endif
             </ul>
         </nav>
-        <nav class="lang-switch" aria-label="{{ __('layout.language_label') }}">
-            <ul>
-                @foreach (config('afyalink.locales') as $code => $name)
-                    <li>
-                        @if ($code === app()->getLocale())
-                            <span class="current" lang="{{ $code }}" aria-current="true">{{ $name }}</span>
-                        @else
-                            <a href="{{ route('locale.switch', ['locale' => $code, 'return' => request()->getRequestUri()]) }}" lang="{{ $code }}" hreflang="{{ $code }}">{{ $name }}</a>
-                        @endif
-                    </li>
-                @endforeach
-            </ul>
-        </nav>
+        @if (count(config('afyalink.locales')) > 1)
+            <nav class="lang-switch" aria-label="{{ __('layout.language_label') }}">
+                <ul>
+                    @foreach (config('afyalink.locales') as $code => $name)
+                        <li>
+                            @if ($code === app()->getLocale())
+                                <span class="current" lang="{{ $code }}" aria-current="true">{{ $name }}</span>
+                            @else
+                                <a href="{{ route('locale.switch', ['locale' => $code, 'return' => request()->getRequestUri()]) }}" lang="{{ $code }}" hreflang="{{ $code }}">{{ $name }}</a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </nav>
+        @endif
     </header>
 
     <main id="main-content">

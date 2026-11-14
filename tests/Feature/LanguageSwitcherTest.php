@@ -15,6 +15,14 @@ class LanguageSwitcherTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Kiswahili is off by default (AFYALINK_ENABLE_SWAHILI), so these tests turn it on.
+        config(['afyalink.locales' => ['en' => 'English', 'sw' => 'Kiswahili']]);
+    }
+
     private function swahili(): static
     {
         return $this->withCookie(SetLocale::COOKIE, 'sw');

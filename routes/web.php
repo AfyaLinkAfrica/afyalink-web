@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
-// Language switcher. Only the locales in config/afyalink.php match; any other code is a 404.
+// Language switcher. The controller returns a 404 for any code that is not an enabled locale.
 Route::get('/language/{locale}', LocaleController::class)
-    ->where('locale', implode('|', array_keys(config('afyalink.locales'))))
+    ->where('locale', '[a-z]{2}')
     ->name('locale.switch');
 
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');

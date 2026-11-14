@@ -12,10 +12,12 @@ class LocaleController extends Controller
 
     /**
      * Remember the chosen language in a cookie and go back to the page the visitor was on.
-     * The route only matches configured locales, so an unknown one is a 404 and sets nothing.
+     * A code that is not an enabled locale is a 404 and sets nothing.
      */
     public function __invoke(Request $request, string $locale): RedirectResponse
     {
+        abort_unless(array_key_exists($locale, config('afyalink.locales')), 404);
+
         return redirect($this->returnPath($request->query('return')))
             ->withCookie(cookie(SetLocale::COOKIE, $locale, self::ONE_YEAR_IN_MINUTES, '/', null, null, true, false, 'lax'));
     }
