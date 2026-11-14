@@ -15,7 +15,8 @@ The interface must be usable in English and Kiswahili (see ADR 0001). Health wor
 - `<html lang>` follows the active language. Dates use the active language.
 - Standard service names are translated in `lang/<locale>/services.php`, keyed by service slug. A service without an entry (for example one added by an import) shows its stored name.
 - Kiswahili health wording is marked with a `// healthcare-review` comment on the same line. Those lines must be approved by a fluent healthcare reviewer before Kiswahili is shown to the public. For that reason Kiswahili is off by default: set `AFYALINK_ENABLE_SWAHILI=true` once the review is done. While it is off, `en` is the only locale, the switcher is not shown and `/language/sw` is a 404.
-- The service worker deletes all saved pages when it sees a navigation to `/language/<code>`. A saved page does not record its language and the worker cannot read the `HttpOnly` cookie, so this stops an old-language copy from being shown after a switch.
+- The service worker answers the `/language/<code>` request itself and deletes all saved pages once the server has replied with the redirect, that is after the cookie is set. A saved page does not record its language and the worker cannot read the `HttpOnly` cookie, so this stops an old-language copy from being shown after a switch. If the request fails (the visitor is offline) or is refused (a 404), nothing is deleted and the saved pages stay usable.
+- The worker also counts language changes and does not save a page whose fetch started before the latest change, so a slow background refresh cannot write an old-language page back after the deletion. This is best effort: the count lives in memory and starts again if the browser restarts the worker.
 - Service names are sorted by the name shown in the active language, after fetching.
 
 ## Consequences

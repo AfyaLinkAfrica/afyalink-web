@@ -28,6 +28,11 @@ const PRECACHE = ['/manifest.webmanifest', '/icons/icon-192.png', '/images/logo.
 const MAX_SAVED_PAGES = 40;
 const SLOW_NETWORK_MS = 4000;
 
+// Counts language changes seen by this worker. A page whose fetch started before the latest
+// change may be in the old language, so it is not saved. Best effort: the count is kept in
+// memory and starts again if the browser restarts the worker.
+let languageChanges = 0;
+
 // Paths that must never be stored.
 const NEVER_STORE_PATHS = ['/admin', '/report', '/language'];
 
@@ -71,9 +76,10 @@ self.addEventListener('fetch', (event) => {
 
     // Saved pages do not record their language, and the language cookie is HttpOnly so the worker
     // cannot read it. When the visitor switches language, drop every saved page: the next visit
-    // is fetched from the network, in the new language. The request itself is left to the browser.
+    // is fetched from the network, in the new language. The pages are dropped only after the
+    // server has answered, so an offline visitor keeps them.
     if (request.mode === 'navigate' && url.pathname.startsWith(LANGUAGE_PATH)) {
-        event.waitUntil(caches.delete(PAGES));
+        event.respondWith(handleLanguageChange(request));
 
         return;
     }
@@ -91,6 +97,23 @@ self.addEventListener('fetch', (event) => {
         event.respondWith(cacheFirst(request));
     }
 });
+
+async function handleLanguageChange(request) {
+    try {
+        const response = await fetch(request);
+
+        // A redirect (opaque in manual redirect mode) means the server set the new language.
+        // An error such as a 404 changed nothing, so the saved pages are kept.
+        if (response.type === 'opaqueredirect' || (response.status >= 300 && response.status < 400)) {
+            languageChanges++;
+            await caches.delete(PAGES);
+        }
+
+        return response;
+    } catch (error) {
+        return offlineResponse();
+    }
+}
 
 function isNeverStored(pathname) {
     return pathname === '/sw.js' || NEVER_STORE_PATHS.some((path) => pathname.startsWith(path) || pathname.includes(path + '/') || pathname.endsWith(path));
@@ -123,6 +146,7 @@ async function cacheFirst(request) {
 
 async function handleNavigation(event) {
     const request = event.request;
+    const started = languageChanges;
     const network = fetch(request);
     const timeout = new Promise((resolve) => setTimeout(() => resolve('timeout'), SLOW_NETWORK_MS));
 
@@ -135,26 +159,26 @@ async function handleNavigation(event) {
     }
 
     if (first !== 'timeout') {
-        return settle(event, first);
+        return settle(event, first, started);
     }
 
     // The network is slow. Use a saved copy if there is one, and refresh it in the background.
     const saved = await savedPage(request);
 
     if (saved) {
-        event.waitUntil(network.then((response) => storePage(request, response.clone())).catch(() => undefined));
+        event.waitUntil(network.then((response) => storePage(request, response.clone(), started)).catch(() => undefined));
 
         return saved;
     }
 
     try {
-        return await settle(event, await network);
+        return await settle(event, await network, started);
     } catch (error) {
         return offlineResponse();
     }
 }
 
-async function settle(event, response) {
+async function settle(event, response, started) {
     // The server is failing: a saved copy, clearly marked, is better than an error page.
     if (response.status >= 500) {
         const saved = await savedPage(event.request);
@@ -163,13 +187,18 @@ async function settle(event, response) {
     }
 
     if (response.ok) {
-        event.waitUntil(storePage(event.request, response.clone()));
+        event.waitUntil(storePage(event.request, response.clone(), started));
     }
 
     return response;
 }
 
-async function storePage(request, response) {
+async function storePage(request, response, started) {
+    // The language changed while this page was loading, so it may be in the old language.
+    if (started !== languageChanges) {
+        return;
+    }
+
     const type = response.headers.get('content-type') || '';
 
     if (response.status !== 200 || response.type !== 'basic' || !type.includes('text/html')) {
@@ -179,6 +208,11 @@ async function storePage(request, response) {
     const html = await response.clone().text();
 
     if (html.includes(NO_STORE_MARKER)) {
+        return;
+    }
+
+    // The body was read above, so check again before writing.
+    if (started !== languageChanges) {
         return;
     }
 

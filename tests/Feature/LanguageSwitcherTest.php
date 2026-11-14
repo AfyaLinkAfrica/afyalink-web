@@ -305,9 +305,45 @@ class LanguageSwitcherTest extends TestCase
         $swahili = [__('services.pharmacy', [], 'sw'), __('services.outpatient-care', [], 'sw')];
 
         // "Duka la dawa" sorts before "Huduma za wagonjwa wa nje", the reverse of the English names.
-        $this->get(route('home'))->assertSeeInOrder($english);
-        $this->swahili()->get(route('home'))->assertSeeInOrder($swahili);
-        $this->swahili()->get(route('facilities.index'))->assertSeeInOrder($swahili);
-        $this->swahili()->get(route('facilities.show', $facility))->assertSeeInOrder($swahili);
+        // Each page shows the services in more than one list, so each list is checked on its own.
+        $home = $this->get(route('home'))->getContent();
+        $this->assertSeeInOrderIn($english, $this->between($home, '<select id="service"', '</select>'));
+        $this->assertSeeInOrderIn($english, $this->between($home, 'id="browse-services-heading"', '</ul>'));
+
+        $home = $this->swahili()->get(route('home'))->getContent();
+        $this->assertSeeInOrderIn($swahili, $this->between($home, '<select id="service"', '</select>'));
+        $this->assertSeeInOrderIn($swahili, $this->between($home, 'id="browse-services-heading"', '</ul>'));
+
+        $index = $this->swahili()->get(route('facilities.index'))->getContent();
+        $this->assertSeeInOrderIn($swahili, $this->between($index, '<select id="service"', '</select>'));
+        $this->assertSeeInOrderIn($swahili, $this->between($index, '<ul class="services"', '</ul>'));
+
+        $show = $this->swahili()->get(route('facilities.show', $facility))->getContent();
+        $this->assertSeeInOrderIn($swahili, $this->between($show, '<ul class="services"', '</ul>'));
+    }
+
+    private function between(string $html, string $start, string $end): string
+    {
+        $from = strpos($html, $start);
+        $this->assertNotFalse($from, "Missing {$start}");
+        $to = strpos($html, $end, $from);
+        $this->assertNotFalse($to, "Missing {$end} after {$start}");
+
+        return substr($html, $from, $to - $from);
+    }
+
+    /**
+     * @param  list<string>  $values
+     */
+    private function assertSeeInOrderIn(array $values, string $html): void
+    {
+        $html = html_entity_decode($html);
+        $offset = 0;
+
+        foreach ($values as $value) {
+            $at = strpos($html, $value, $offset);
+            $this->assertNotFalse($at, "{$value} not found in order in: {$html}");
+            $offset = $at + strlen($value);
+        }
     }
 }

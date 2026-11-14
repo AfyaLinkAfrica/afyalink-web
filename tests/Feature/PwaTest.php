@@ -119,14 +119,24 @@ class PwaTest extends TestCase
         $this->assertStringContainsString("pathname === '/sw.js'", $this->worker());
     }
 
-    public function test_choosing_a_language_deletes_the_saved_pages(): void
+    public function test_choosing_a_language_deletes_the_saved_pages_only_after_the_server_answers(): void
     {
         $worker = $this->worker();
 
         // Saved pages do not record their language and the worker cannot read the HttpOnly cookie,
-        // so a switch must drop them. The switch request itself is left to the browser.
+        // so a switch must drop them, but only once the server has set the new language.
         $this->assertStringContainsString("const LANGUAGE_PATH = '/language/';", $worker);
         $this->assertStringContainsString("request.mode === 'navigate' && url.pathname.startsWith(LANGUAGE_PATH)", $worker);
-        $this->assertStringContainsString('caches.delete(PAGES)', $worker);
+        $this->assertStringContainsString('event.respondWith(handleLanguageChange(request));', $worker);
+        $this->assertMatchesRegularExpression('/await fetch\(request\);.*?languageChanges\+\+;\s*await caches\.delete\(PAGES\);.*?return response;.*?catch.*?return offlineResponse\(\);/s', $worker);
+    }
+
+    public function test_pages_fetched_before_a_language_change_are_not_saved(): void
+    {
+        $worker = $this->worker();
+
+        $this->assertStringContainsString('const started = languageChanges;', $worker);
+        $this->assertStringContainsString('if (started !== languageChanges) {', $worker);
+        $this->assertSame(2, substr_count($worker, 'if (started !== languageChanges) {'));
     }
 }
