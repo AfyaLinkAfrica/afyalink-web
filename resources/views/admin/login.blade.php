@@ -11,7 +11,7 @@
         font: inherit;
         color: var(--text);
         background: var(--bg);
-        border: 2px solid var(--border);
+        border: 2px solid var(--control-border);
         border-radius: .5rem;
     }
     input[type="email"]:focus-visible, input[type="password"]:focus-visible {

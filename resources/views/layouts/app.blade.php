@@ -15,6 +15,7 @@
             --brand-dark: #115e59;
             --on-brand: #ffffff;
             --border: #d1e7df;
+            --control-border: #668078;
             --alert-bg: #fff7ed;
             --alert-text: #7c2d12;
             --alert-border: #fdba74;
@@ -29,6 +30,7 @@
                 --brand-dark: #6ee7b7;
                 --on-brand: #04201c;
                 --border: #1f4a42;
+                --control-border: #5f8f84;
                 --alert-bg: #3b1d0e;
                 --alert-text: #fed7aa;
                 --alert-border: #9a3412;
@@ -151,9 +153,10 @@
             font: inherit;
             color: var(--text);
             background: var(--bg);
-            border: 2px solid var(--border);
+            border: 2px solid var(--control-border);
             border-radius: .5rem;
         }
+        ::placeholder { color: var(--muted); opacity: 1; }
         textarea { resize: vertical; }
         select:focus-visible, input[type="text"]:focus-visible, textarea:focus-visible, button:focus-visible {
             outline: 3px solid var(--brand-dark);
@@ -223,7 +226,7 @@
 <body>
     <a class="skip-link" href="#main-content">{{ __('layout.skip_to_content') }}</a>
 
-    <div class="emergency" role="note">{{ __('layout.emergency') }}</div>
+    <aside class="emergency" aria-label="{{ __('layout.emergency_label') }}">{{ __('layout.emergency') }}</aside>
 
     <header class="site-header">
         <a class="brand" href="{{ route('home') }}">

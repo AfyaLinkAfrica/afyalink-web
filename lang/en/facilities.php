@@ -39,7 +39,7 @@ return [
     'last_verified' => 'Last verified',
     'location' => 'Location',
     'open_map' => 'Open in OpenStreetMap',
-    'map' => 'Map',
+    'map' => 'Facility map',
     'show_map' => 'Show map',
     'hide_map' => 'Hide map',
     'map_title' => 'Map showing the location of this facility',
