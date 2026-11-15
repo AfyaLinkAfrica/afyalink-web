@@ -22,6 +22,12 @@ class SetLocale
             app()->setLocale($locale);
         }
 
-        return $next($request);
+        $response = $next($request);
+
+        // Pages differ by this cookie, so a shared cache (a CDN or reverse proxy) must keep
+        // one copy per language choice instead of serving one language to everybody.
+        $response->headers->set('Vary', 'Cookie', false);
+
+        return $response;
     }
 }
