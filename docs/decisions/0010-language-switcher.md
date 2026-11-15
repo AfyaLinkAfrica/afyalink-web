@@ -22,3 +22,5 @@ The interface must be usable in English and Kiswahili (see ADR 0001). Health wor
 ## Consequences
 - To add a language, add its code to `config/afyalink.php`, copy a `lang/` folder, and translate it. The key-parity test covers it.
 - Not translated yet: the static offline page (`public/offline.html`), the saved-copy notice in `public/sw.js`, and the assistant's understanding of typed words and its emergency word list, which are English only. The Kiswahili assistant page says so.
+- Responses carry `Vary: Cookie`, so a shared cache (a CDN or reverse proxy) keeps one copy per language choice instead of serving one language to everybody.
+- `/language/<code>` changes state on a GET request. The effect is small (the visitor's language flips) and the link is `nofollow`, so this is accepted.

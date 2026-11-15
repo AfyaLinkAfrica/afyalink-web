@@ -24,11 +24,12 @@ class LocaleController extends Controller
 
     /**
      * Only a path on this site is accepted, so the switcher cannot be used as an open redirect.
-     * Anything else, including "//host" and "/\host" forms, goes to the home page.
+     * Anything else, including "//host" and "/\host" forms and any control character
+     * (NUL, tab, line breaks, DEL) or space, goes to the home page.
      */
     private function returnPath(mixed $path): string
     {
-        if (is_string($path) && preg_match('#^/(?![/\x5c])\S*\z#', $path) === 1) {
+        if (is_string($path) && preg_match('#^/(?![/\x5c])[^\x00-\x20\x7f]*\z#', $path) === 1) {
             return $path;
         }
 
