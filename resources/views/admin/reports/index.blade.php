@@ -52,7 +52,7 @@
                             <span class="badge">{{ __('admin.contact_given') }}</span>
                         @endif
                     </div>
-                    <p>{{ __('admin.received', ['date' => $report->created_at->format('j F Y, H:i')]) }}</p>
+                    <p>{{ __('admin.received', ['date' => $report->created_at->translatedFormat('j F Y, H:i')]) }}</p>
                     <p>{{ \Illuminate\Support\Str::limit($report->message, 160) }}</p>
                 </li>
             @endforeach

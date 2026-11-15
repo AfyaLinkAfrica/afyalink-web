@@ -68,7 +68,7 @@
                         @if ($facility->services->isNotEmpty())
                             <ul class="services" aria-label="{{ __('facilities.services') }}">
                                 @foreach ($facility->services as $service)
-                                    <li>{{ $service->name }}</li>
+                                    <li>{{ $service->label }}</li>
                                 @endforeach
                             </ul>
                         @endif

@@ -14,11 +14,11 @@ class FacilityController extends Controller
 
     public function index(Request $request): View
     {
-        $services = Service::query()->orderBy('name')->get(['id', 'name', 'slug']);
+        $services = Service::sortedByLabel(Service::query()->get(['id', 'name', 'slug']));
         $filters = $this->filters($request, $services);
 
         $facilities = Facility::query()
-            ->with(['services' => fn ($query) => $query->orderBy('name')])
+            ->with('services')
             ->inCounty($filters['county'])
             ->ofType($filters['type'])
             ->offeringService($filters['service'])
@@ -26,6 +26,8 @@ class FacilityController extends Controller
             ->orderBy('name')
             ->paginate(self::PER_PAGE)
             ->withQueryString();
+
+        $facilities->getCollection()->each(fn (Facility $facility) => $facility->setRelation('services', Service::sortedByLabel($facility->services)));
 
         return view('facilities.index', [
             'facilities' => $facilities,
@@ -43,7 +45,8 @@ class FacilityController extends Controller
      */
     public function show(Request $request, Facility $facility): View
     {
-        $facility->load(['services' => fn ($query) => $query->orderBy('name')]);
+        $facility->load('services');
+        $facility->setRelation('services', Service::sortedByLabel($facility->services));
 
         return view('facilities.show', [
             'facility' => $facility,

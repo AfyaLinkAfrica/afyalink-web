@@ -15,6 +15,7 @@
             --brand-dark: #115e59;
             --on-brand: #ffffff;
             --border: #d1e7df;
+            --control-border: #668078;
             --alert-bg: #fff7ed;
             --alert-text: #7c2d12;
             --alert-border: #fdba74;
@@ -29,6 +30,7 @@
                 --brand-dark: #6ee7b7;
                 --on-brand: #04201c;
                 --border: #1f4a42;
+                --control-border: #5f8f84;
                 --alert-bg: #3b1d0e;
                 --alert-text: #fed7aa;
                 --alert-border: #9a3412;
@@ -104,10 +106,20 @@
         }
         header.site-header nav a:hover { background: var(--bg); }
         header.site-header nav a[aria-current="page"] { color: var(--on-brand); background: var(--brand); border-bottom-color: transparent; }
+        header.site-header nav .current {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.75rem;
+            padding: .25rem .9rem;
+            border-radius: .5rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            border: 2px solid var(--brand);
+        }
         @media (max-width: 39.99rem) {
             header.site-header nav, header.site-header nav ul { width: 100%; }
             header.site-header nav li { flex: 1; }
-            header.site-header nav a { justify-content: center; width: 100%; }
+            header.site-header nav a, header.site-header nav .current { justify-content: center; width: 100%; }
         }
         main { flex: 1; width: 100%; max-width: 48rem; margin: 0 auto; padding: 2rem 1.5rem; }
         .card {
@@ -151,9 +163,10 @@
             font: inherit;
             color: var(--text);
             background: var(--bg);
-            border: 2px solid var(--border);
+            border: 2px solid var(--control-border);
             border-radius: .5rem;
         }
+        ::placeholder { color: var(--muted); opacity: 1; }
         textarea { resize: vertical; }
         select:focus-visible, input[type="text"]:focus-visible, textarea:focus-visible, button:focus-visible {
             outline: 3px solid var(--brand-dark);
@@ -223,7 +236,7 @@
 <body>
     <a class="skip-link" href="#main-content">{{ __('layout.skip_to_content') }}</a>
 
-    <div class="emergency" role="note">{{ __('layout.emergency') }}</div>
+    <aside class="emergency" aria-label="{{ __('layout.emergency_label') }}">{{ __('layout.emergency') }}</aside>
 
     <header class="site-header">
         <a class="brand" href="{{ route('home') }}">
@@ -239,6 +252,21 @@
                 @endif
             </ul>
         </nav>
+        @if (count(config('afyalink.locales')) > 1)
+            <nav class="lang-switch" aria-label="{{ __('layout.language_label') }}">
+                <ul>
+                    @foreach (config('afyalink.locales') as $code => $name)
+                        <li>
+                            @if ($code === app()->getLocale())
+                                <span class="current" lang="{{ $code }}" aria-current="true">{{ $name }}</span>
+                            @else
+                                <a href="{{ route('locale.switch', ['locale' => $code, 'return' => request()->getRequestUri()]) }}" rel="nofollow" lang="{{ $code }}" hreflang="{{ $code }}">{{ $name }}</a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </nav>
+        @endif
     </header>
 
     <main id="main-content">

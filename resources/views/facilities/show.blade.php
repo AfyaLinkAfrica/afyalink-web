@@ -59,7 +59,7 @@
                 <dd>
                     <ul class="services">
                         @foreach ($facility->services as $service)
-                            <li>{{ $service->name }}</li>
+                            <li>{{ $service->label }}</li>
                         @endforeach
                     </ul>
                 </dd>

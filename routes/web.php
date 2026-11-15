@@ -5,11 +5,17 @@ use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ReportController;
 use App\Http\Middleware\PrivateAdminPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+// Language switcher. The controller returns a 404 for any code that is not an enabled locale.
+Route::get('/language/{locale}', LocaleController::class)
+    ->where('locale', '[a-z]{2}')
+    ->name('locale.switch');
 
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
 Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');

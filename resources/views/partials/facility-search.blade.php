@@ -25,7 +25,7 @@
             <select id="service" name="service">
                 <option value="">{{ __('facilities.any_service') }}</option>
                 @foreach ($services as $service)
-                    <option value="{{ $service->slug }}" @selected(($filters['service'] ?? null) === $service->slug)>{{ $service->name }}</option>
+                    <option value="{{ $service->slug }}" @selected(($filters['service'] ?? null) === $service->slug)>{{ $service->label }}</option>
                 @endforeach
             </select>
         </div>
